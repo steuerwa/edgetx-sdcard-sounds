@@ -137,6 +137,36 @@ And finally run script to generate all the files. Script is smart and skips alre
 python3 voice-gen-elevenlabs.py
 ```
 
+### Piper (local TTS)
+
+`voice-gen-piper.py` generates voice packs fully locally using [Piper](https://github.com/rhasspy/piper) text-to-speech and a `.onnx` voice model - no API key or internet connection needed during generation.
+
+Set up a virtual environment and install Piper:
+
+```bash
+python3 -m venv .venv
+.venv/bin/pip install piper-tts rich
+```
+
+Get a voice model (a `.onnx` file plus matching `.onnx.json`), either from [rhasspy/piper-voices](https://huggingface.co/rhasspy/piper-voices) or via the built-in downloader:
+
+```bash
+.venv/bin/python -m piper.download_voices de_DE-thorsten-high -d /path/to/models
+```
+
+Then run the script with the CSV file, the output language folder and the model path:
+
+```bash
+.venv/bin/python voice-gen-piper.py voices/de-DE.csv de_piper-thorsten --model /path/to/models/de_DE-thorsten-high.onnx
+```
+
+The output WAV files match the EdgeTX requirements (32 kHz, mono, 16-bit PCM). Already generated files are skipped, so an interrupted run can simply be resumed.
+
+Options:
+
+- `-c/--config`: path to the model config (defaults to `<model>.onnx.json`)
+- `-s/--length-scale`: speech speed (higher = slower, default `1.0`)
+
 ## Voices
 
 All of the voices used in the EdgeTX voice packs have been picked from the [neural voices](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/language-support?tabs=speechtotext#prebuilt-neural-voices) offered by Microsoft Azure text to speech service, in order to get as close as possible to human-like voices. If you want to see what voices are available, and try different phrases, [check out the online demo generator](https://azure.microsoft.com/en-us/services/cognitive-services/text-to-speech/#features). Using some recording software, you could even save your own phrases and use them in the voice packs.

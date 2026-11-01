@@ -251,3 +251,5 @@ String ID,Source text,Translation,Context,Path,Filename
 250,thermal,Thermik.,,,es3thm.wav
 251,motor is not armed,Motor nicht scharf,,,es3mcd.wav
 252,motor to idle before arming,Motor auf Leerlauf vor dem Scharfschalten,,,es3noa.wav
+253,speed two,Speed zwei,,,es3sp2.wav
+254,thermal two,Thermik. Zwei,,,es3th2.wav
